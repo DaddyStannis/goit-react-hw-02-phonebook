@@ -19,3 +19,14 @@ class ContactList extends Component {
 }
 
 export default ContactList;
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ),
+  onDelete: PropTypes.func,
+  onFilter: PropTypes.func,
+};

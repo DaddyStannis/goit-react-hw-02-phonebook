@@ -24,5 +24,6 @@ class List extends Component {
 export default List;
 
 List.propTypes = {
+  onDelete: PropTypes.func,
   id: PropTypes.string,
 };

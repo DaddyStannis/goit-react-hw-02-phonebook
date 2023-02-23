@@ -10,25 +10,6 @@ class App extends Component {
     filter: '',
   };
 
-  render() {
-    const contacts = this.getFilteredContacts();
-
-    return (
-      <div className="container">
-        <Section title="Phonebook">
-          <ContactForm onSubmit={this.handleSubmit} />
-        </Section>
-        <Section title="Contacts">
-          <ContactList
-            onFilter={this.handleFilter}
-            onDelete={this.handleDelete}
-            contacts={contacts}
-          />
-        </Section>
-      </div>
-    );
-  }
-
   getFilteredContacts() {
     const { filter: substring, contacts } = this.state;
     if (!substring.length) {
@@ -44,17 +25,18 @@ class App extends Component {
     const { contacts } = this.state;
 
     if (this.isDublicate(name)) {
+      alert('This contact already exist');
       return;
     }
 
-    contacts.push({
+    const newContact = {
       id: nanoid(),
       name: name,
       number: number,
-    });
+    };
 
     this.setState({
-      contacts,
+      contacts: [...contacts, newContact],
     });
   };
 
@@ -87,6 +69,25 @@ class App extends Component {
   handleFilter = substring => {
     this.setState({ filter: substring.toLowerCase() });
   };
+
+  render() {
+    const contacts = this.getFilteredContacts();
+
+    return (
+      <div className="container">
+        <Section title="Phonebook">
+          <ContactForm onSubmit={this.handleSubmit} />
+        </Section>
+        <Section title="Contacts">
+          <ContactList
+            onFilter={this.handleFilter}
+            onDelete={this.handleDelete}
+            contacts={contacts}
+          />
+        </Section>
+      </div>
+    );
+  }
 }
 
 export default App;

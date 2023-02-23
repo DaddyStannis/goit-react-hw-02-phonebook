@@ -7,25 +7,11 @@ import { Component } from 'react';
 class ContactForm extends Component {
   state = { name: '', number: '' };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit} className={styles.wrapper}>
-        <div className={styles['input-wrapper']}>
-          <NameField onChange={this.handleChange} />
-          <NumberField onChange={this.handleChange} />
-        </div>
-
-        <Button text="Add" type="submit" />
-      </form>
-    );
-  }
-
   handleSubmit = e => {
     const { onSubmit } = this.props;
     e.preventDefault();
     onSubmit(this.state);
-    e.target.reset();
-    // this.reset(); // Тут є питання )
+    this.reset();
   };
 
   handleChange = (fieldValue, fieldName) => {
@@ -37,6 +23,21 @@ class ContactForm extends Component {
       name: '',
       number: '',
     });
+  }
+
+  render() {
+    const { name, number } = this.state;
+
+    return (
+      <form onSubmit={this.handleSubmit} className={styles.wrapper}>
+        <div className={styles['input-wrapper']}>
+          <NameField onChange={this.handleChange} value={name} />
+          <NumberField onChange={this.handleChange} value={number} />
+        </div>
+
+        <Button text="Add" type="submit" />
+      </form>
+    );
   }
 }
 

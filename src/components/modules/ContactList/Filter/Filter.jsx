@@ -20,3 +20,7 @@ class Filter extends Component {
 }
 
 export default Filter;
+
+Filter.propTypes = {
+  onFilter: PropTypes.func,
+};
