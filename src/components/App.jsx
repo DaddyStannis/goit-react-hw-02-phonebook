@@ -35,8 +35,8 @@ class App extends Component {
       number: number,
     };
 
-    this.setState({
-      contacts: [...contacts, newContact],
+    this.setState((state, props) => {
+      return { contacts: [...contacts, newContact] };
     });
   };
 
